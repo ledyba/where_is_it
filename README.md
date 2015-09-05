@@ -1,5 +1,11 @@
 # Where Is It?
 
-[Here is the demo.](http://ledyba.org/utl/WhereIsIt/)
+地名を隠したストリートビューを10秒間眺めて、場所を当てるゲームです。
+
+スマホのジャイロ機能に対応していて、スマホをかざすとそれに合わせてストリートビューも動きます。
+
+突然目隠しをされて未知の場所に置き去りにされた人の気分になってプレイしてみてください。
+
+[こちらで遊べます。](http://ledyba.org/utl/WhereIsIt/)
 
 [![](https://raw.githubusercontent.com/ledyba/where_is_it/master/screenshot.png)](http://ledyba.org/utl/WhereIsIt/)
