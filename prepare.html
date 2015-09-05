@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prepare</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+        function initMap() {
+          var cands = [];
+          function ready(){
+            return cands.length >= 100;
+          }
+          function selectPlace(onDone){
+            var geocoder = new google.maps.Geocoder;
+
+            function searchRand(){
+              var latlng = {lat:-90 + 180 * Math.random(), lng:-180 + 360 * Math.random()};
+              var streetViewService = new google.maps.StreetViewService();
+              streetViewService.getPanoramaByLocation(latlng, 5000, function(data, status)
+              {
+                  if (status == google.maps.StreetViewStatus.OK)
+                  {
+                      var loc = data.location.latLng;
+                      geocoder.geocode({'location': loc}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK && results[1]) {
+                          console.log(cands.length + 1,loc, results[1].formatted_address);
+                          cands.push({
+                            lat: loc.lat(),
+                            lng: loc.lng(),
+                            addr: results[1].formatted_address
+                          });
+                        }
+                        if(ready()){
+                          document.body.innerText = JSON.stringify(cands, null, '\t');
+                        }else{
+                          setTimeout(searchRand,10);
+                        }
+                      });
+                  }else{
+                    setTimeout(searchRand,10);
+                  }
+              });
+            }
+            searchRand();
+          }
+          selectPlace();
+        }
+
+        </script>
+        <script
+          src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"
+          async defer>
+        </script>
+    </body>
+</html>

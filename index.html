@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PanoramaSensorsViewer <!-- @echo PanoramaSensorsViewerVersionAndRevision --> / Basic</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name=viewport content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" type="text/css" href="./css/topheman-panorama.css" />
+        <link rel="stylesheet" type="text/css" href="./css/common.css" />
+        <link rel="stylesheet" type="text/css" href="./css/site.css" />
+        <!-- @include googleAnalyticsScriptTag.html -->
+    </head>
+    <body>
+        <div id="pano"></div>
+        <script src="./js/vendor/require.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        function prepare(){
+          var cands = [];
+          function ready(){
+            return cands.length >= 30;
+          }
+          function selectPlace(onDone){
+            var geocoder = new google.maps.Geocoder;
+
+            function searchRand(){
+              var latlng = {lat:-90 + 180 * Math.random(), lng:-180 + 360 * Math.random()};
+              var streetViewService = new google.maps.StreetViewService();
+              streetViewService.getPanoramaByLocation(latlng, 5000, function(data, status)
+              {
+                  if (status == google.maps.StreetViewStatus.OK)
+                  {
+                      var loc = data.location.latLng;
+                      geocoder.geocode({'location': loc}, function(results, status) {
+                        if (status === google.maps.GeocoderStatus.OK && results[1]) {
+                          console.log(loc," -> ",results[1].formatted_address);
+                          cands.push({
+                            lat: loc.lat(),
+                            lng: loc.lng(),
+                            addr: results[1].formatted_address
+                          });
+                        }
+                        if(ready()){
+                          console.log(JSON.stringify(cands));
+                          setTimeout(onDone,10);
+                        }else{
+                          setTimeout(searchRand,10);
+                        }
+                      });
+                  }else{
+                    setTimeout(searchRand,10);
+                  }
+              });
+            }
+            searchRand();
+          }
+          searchRand();
+        }
+          var points =
+[
+   {
+      "lat":47.901524,
+      "lng":-121.908953,
+      "addr":"アメリカ合衆国 ワシントン ウッズ・クリーク"
+   },
+   {
+      "lat":55.994692,
+      "lng":39.678597999999965,
+      "addr":"ヴラジーミル州 ロシア 601115"
+   },
+   {
+      "lat":49.281896,
+      "lng":-108.56185700000003,
+      "addr":"カナダ 〒S0N 0W0 サスカチュワン フロンティア"
+   },
+   {
+      "lat":57.674884,
+      "lng":16.02924699999994,
+      "addr":"Vimmerby S, スウェーデン"
+   },
+   {
+      "lat":-6.514885,
+      "lng":-35.98019399999998,
+      "addr":"Cuité - PB, 58175-000 ブラジル"
+   },
+   {
+      "lat":46.06529,
+      "lng":-65.89862299999999,
+      "addr":"カナダ 〒E4A 3A1 ニュー・ブランズウィック カンバーランド・ベイ"
+   },
+   {
+      "lat":-21.305175,
+      "lng":-42.84285299999999,
+      "addr":"ブラジル ミナスジェライス州 アストウフォ・ドゥートラ"
+   },
+   {
+      "lat":-29.982303,
+      "lng":29.90938200000005,
+      "addr":"南アフリカ クレイトン"
+   },
+   {
+      "lat":38.042597,
+      "lng":-92.77169800000001,
+      "addr":"アメリカ合衆国 ミズーリ オシオーラ"
+   },
+   {
+      "lat":51.238089,
+      "lng":8.004259000000047,
+      "addr":"ドイツ ズンダーン (ザウアーラント)"
+   },
+   {
+      "lat":-34.397138,
+      "lng":137.86693200000002,
+      "addr":"オーストラリア 〒5571 南オーストラリア州 カニングハム"
+   },
+   {
+      "lat":35.728752,
+      "lng":-120.70088299999998,
+      "addr":"アメリカ合衆国 〒93446 カリフォルニア パソ・ロブレス"
+   },
+   {
+      "lat":45.089223,
+      "lng":26.115488000000028,
+      "addr":"ルーマニア ポデニイ・ベキ"
+   },
+   {
+      "lat":39.562072,
+      "lng":-121.114057,
+      "addr":"アメリカ合衆国 〒95981 カリフォルニア ストロベリー・バレー"
+   },
+   {
+      "lat":-7.455282,
+      "lng":-48.706916999999976,
+      "addr":"ブラジル トカンティンス アラグァイーナ"
+   },
+   {
+      "lat":54.874299,
+      "lng":39.30830800000001,
+      "addr":"モスクワ州 ロシア 140550"
+   },
+   {
+      "lat":-27.431768,
+      "lng":151.69685700000002,
+      "addr":"オーストラリア 〒4401 クイーンズランド オーキー"
+   },
+   {
+      "lat":35.722156,
+      "lng":-118.51108599999998,
+      "addr":"2999 California 155, Wofford Heights, CA 93285 アメリカ合衆国"
+   },
+   {
+      "lat":44.694423,
+      "lng":-1.2527549999999792,
+      "addr":"フランス レージュ＝カップ＝フェレ"
+   },
+   {
+      "lat":34.083121,
+      "lng":-116.56343200000003,
+      "addr":"アメリカ合衆国 〒92256 カリフォルニア モロンゴ・バレー"
+   },
+   {
+      "lat":55.596509,
+      "lng":-5.686782999999991,
+      "addr":"イギリス 〒PA29 6XE ターバート ムアズデール"
+   },
+   {
+      "lat":38.448496,
+      "lng":-82.36242099999998,
+      "addr":"アメリカ合衆国 オハイオ ローム"
+   },
+   {
+      "lat":-4.502108,
+      "lng":-49.10030499999999,
+      "addr":"State of Pará, 68590-000 ブラジル"
+   },
+   {
+      "lat":17.746229,
+      "lng":-101.56581499999999,
+      "addr":"メキシコ ゲレロ シワタネホ・デ・アスエタ"
+   },
+   {
+      "lat":46.489731,
+      "lng":5.070302999999967,
+      "addr":"フランス ロムネ"
+   },
+   {
+      "lat":41.294388,
+      "lng":15.13567999999998,
+      "addr":"イタリア 〒82022 ベネベント県 カステルフランコ・イン・ミスカーノ"
+   },
+   {
+      "lat":-20.48383,
+      "lng":-51.781656,
+      "addr":"ブラジル マト・グロッソ・ド・スル州 トレス・ラゴアス"
+   },
+   {
+      "lat":56.211947,
+      "lng":59.08745399999998,
+      "addr":"ロシア 〒623085 スヴェルドロフスク州 リャビノフカ"
+   },
+   {
+      "lat":49.373672,
+      "lng":3.6532359999999926,
+      "addr":"フランス ロンギュヴァル＝バルボンヴァル"
+   },
+   {
+      "lat":45.719071,
+      "lng":11.33805899999993,
+      "addr":"イタリア ヴィチェンツァ県 スキオ"
+   }
+];
+          function shuffle(list) {
+            var i = list.length;
+
+            while (--i) {
+              var j = Math.floor(Math.random() * (i + 1));
+              if (i == j) continue;
+              var k = list[i];
+              list[i] = list[j];
+              list[j] = k;
+            }
+            return list;
+          }
+          function prepareAnswer(){
+            var doms = [];
+            var ans;
+            for(var i=0;i<4;i++){
+              var el = document.createElement("button");
+              var name = points[i];
+              el.innerText = name.addr;
+              el.className = "ans-button";
+              el.addEventListener('click', function(){
+                for(var i=0;i<doms.length;i++) {
+                  var p = doms[i].parentElement;
+                  if(doms[i] !== ans){
+                    p.removeChild(doms[i]);
+                  }
+                }
+                function reload(){
+                  location.reload(false);
+                }
+                window.setTimeout(function(){
+                  tbl.addEventListener('click', reload);
+                  ans.addEventListener('click', reload);
+                });
+              },true);
+              doms.push(el);
+            }
+            ans = doms[0];
+            shuffle(doms);
+            var tbl = document.createElement("table");
+            tbl.className="ans-table";
+            var row1 = document.createElement("tr");
+            var row2 = document.createElement("tr");
+            row1.className="ans-tr";
+            row2.className="ans-tr";
+            tbl.appendChild(row1);
+            tbl.appendChild(row2);
+            var ans1 = document.createElement("td");
+            var ans2 = document.createElement("td");
+            var ans3 = document.createElement("td");
+            var ans4 = document.createElement("td");
+            ans1.className="ans-td";
+            ans1.width="50%";
+            ans1.height="50%";
+            ans2.className="ans-td";
+            ans2.width="50%";
+            ans2.height="50%";
+            ans3.className="ans-td";
+            ans3.width="50%";
+            ans3.height="50%";
+            ans4.className="ans-td";
+            ans4.width="50%";
+            ans4.height="50%";
+            row1.appendChild(ans1);
+            row1.appendChild(ans2);
+            row2.appendChild(ans3);
+            row2.appendChild(ans4);
+            ans1.appendChild(doms[0]);
+            ans2.appendChild(doms[1]);
+            ans3.appendChild(doms[2]);
+            ans4.appendChild(doms[3]);
+            document.body.appendChild(tbl);
+          }
+          require(['./js/require.config'], function(config) {
+              require(['utils/screenManager','topheman-panorama/PanoramaManager'],function(screenManager,PanoramaManager){
+                function load(pt){
+                  var panoramaManager = new PanoramaManager(document.getElementById('pano'));
+                  screenManager.init(panoramaManager);
+                  var panoramaOptions = {
+                      firefoxSensorsNotReady: function(){
+                          var message = "Connection to your device\'s sensors failed (android firefox bug) please try to reload the page\n(it could take several times, after that, the connection will be made and the app will run smoothly).\nI\'m sorry for this, but I can\'t do anything more about it ...";
+                          if(confirm(message)){
+                              window.location.reload(true);
+                          }
+                      },
+                      success : function(data){
+                          var map = this;
+                          this.setOptions({
+                              addressControl: false,
+                              zoomControl: false,
+                              enableCloseButton: false,
+                              linksControl: false
+                          });
+                          var desc = document.createElement("div");
+                          desc.innerText = "ここはどこ？";
+                          desc.className="desc";
+                          document.body.appendChild(desc);
+                          var t = document.createElement("div");
+                          t.className="time";
+                          document.body.appendChild(t);
+                          var left = 10;
+                          var id = window.setInterval(function(){
+                            t.innerText=left.toFixed(1);
+                            left-=0.1;
+                            if(left <= 0){
+                              document.body.removeChild(t);
+                              window.clearInterval(id);
+                              prepareAnswer();
+                            }
+                          },100);
+                          //prepare();
+                      }
+                  };
+                  panoramaManager.init(pt,panoramaOptions);
+                }
+                shuffle(points);
+                var pt = points[0];
+                load({lat: pt.lat, lon: pt.lng});
+                //load({lat:37.869260, lon:-122.254811});
+              });
+          });
+        </script>
+    </body>
+</html>
