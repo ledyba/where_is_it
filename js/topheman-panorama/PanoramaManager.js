@@ -175,7 +175,7 @@ define(['topheman-panorama/utils/sensorsChecker','topheman-panorama/utils/device
                 loadAllFunction();
             }
             else{
-                request = "async!http://maps.google.com/maps/api/js?sensor=false";
+                request = "async!https://maps.google.com/maps/api/js?sensor=false";
                 if(options && options.googleApiKey){
                     request += "&key="+options.googleApiKey;
                 }

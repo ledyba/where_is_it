@@ -157,7 +157,7 @@ function initServer(src) {
             }
           }
         };
-        xhr.open('GET', 'http://' + remoteTiltHost + '/getkey', true);
+        xhr.open('GET', '//' + remoteTiltHost + '/getkey', true);
         xhr.send(null);
       }
     }

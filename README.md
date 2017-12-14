@@ -6,6 +6,6 @@
 
 目隠しをされて突然未知の場所に置き去りにされた人の気分になってプレイしてみてください。
 
-[こちらで遊べます。](http://ledyba.org/utl/WhereIsIt/)
+[こちらで遊べます。](//ledyba.org/utl/WhereIsIt/)
 
-[![](https://raw.githubusercontent.com/ledyba/where_is_it/master/screenshot.png)](http://ledyba.org/utl/WhereIsIt/)
+[![](//raw.githubusercontent.com/ledyba/where_is_it/master/screenshot.png)](//ledyba.org/utl/WhereIsIt/)
